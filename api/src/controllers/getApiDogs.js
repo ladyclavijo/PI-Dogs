@@ -2,7 +2,7 @@ const axios = require("axios");
 const apiKey = process.env.API_KEY;
 
 
-const getDogsApi = async() => {
+const getApiDogs = async() => {
     
     const dogsApiUrl = await axios.get(`https://api.thedogapi.com/v1/breeds?api_key=${apiKey}`)
     
@@ -22,4 +22,4 @@ const getDogsApi = async() => {
 };
 
 
-module.exports = getDogsApi;
+module.exports = getApiDogs;
