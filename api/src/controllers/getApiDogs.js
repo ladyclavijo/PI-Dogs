@@ -10,7 +10,7 @@ const getApiDogs = async() => {
         return {
             id: e.id,
             name: e.name,
-            temperament: e.temperament.map((el) => el.temperament.name),
+            temperament: e.temperament ? e.temperament.split(",").map(t => t.trim()) : [],
             height: e.height.metric,
             weight: e.weight.metric,
             life_span: e.life_span,
@@ -20,6 +20,5 @@ const getApiDogs = async() => {
     });
     return dogsApi;
 };
-
 
 module.exports = getApiDogs;
