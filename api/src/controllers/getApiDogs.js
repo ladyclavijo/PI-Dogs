@@ -9,7 +9,7 @@ const {API_KEY} = process.env;
 const getApiDogs = async() => {
         
     const urlDogs = await axios.get(`https://api.thedogapi.com/v1/breeds?api_key=${API_KEY}&`); //hago destructuring de la data de axios
-
+    
     const apiData = urlDogs.data.map(e => {
         return {
             id: e.id,
