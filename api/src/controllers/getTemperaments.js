@@ -1,34 +1,37 @@
 const axios = require("axios");
-const apiKey = process.env.API_KEY;
+require('dotenv').config();
+const {API_KEY} = process.env;
 const { Temperament } = require("../db");
 
-const getAllTemperaments = async () => {
 
-    let getInfoTemperaments = async() => {
-        return await Temperament.findAll() // me traigo toda la info que encuentre en el modelo Temperament
-    }
+const allTemperaments = async () => {
 
-      try {
-           if(getInfoTemperaments.length === 0) { // aquí pregunto sino existe esa info
-            const { data } = await axios.get(`https://api.thedogapi.com/v1/breeds?api_key=${API_KEY}`); //sino existe, la traigo de la API
-            const dataTypes = data.results; // guardo la info que traigo de la API
-        
-            dataTypes.map((el) => { // mapeo la info de la API
-            Temperament.findOrCreate({ //entro a Temperament y busco hacer un match con el nombre del type y el nombre del elemento, sino hay match, lo creo.. si sí lo hay, lo devuelvo
-                where: {name: el.name}
-            });
-            });
+    try {
+ 
+    const temps = await axios.get(`https://api.thedogapi.com/v1/breeds?api_key=${API_KEY}`) //me traigo en forma de arreglo los temperaments
 
-            getInfoTemperaments = await Temperament.findAll(); // reasigno la variable en la cual voy a buscar toda la info que ahora existe en Type
-      
-            return getInfoTemperaments 
-           } 
-           return getInfoTemperaments //devuelvo si hay info en Type
+    temps.data.forEach(e => { // analizo cada elemento del arreglo de razas
+        if (e.temperament){
+            let foundTemps = e.temperament.split(", ");
+//Esta parte del código es importante xq divide los temperamentos de las razas de dogs en temperamentos
+//individuales, lo que facilita el proceso de agregarlos a la BD
 
-      } 
-        catch (error) {
+            foundTemps.forEach(e => {// recorre cada raza de perro y si tiene un temp definido, lo recorre
+                Temperament.findOrCreate({//busca y sino lo encuentra lo crea
+                    where: { name: e}
+                })
+            })
+        }
+    });
+     const findTemps = await Temperament.findAll(); 
+     return findTemps; //devuelve todos los temperamentos almacenados en la BD usand findAll
+    
+    } catch (error) {
             return error        
         }
 };
 
-module.exports = getAllTemperaments;
+//En resumen, esta fn obtiene los temperamentos de las razas de dogs de la API
+//y los guarda en una BD para su uso posterior
+
+module.exports = allTemperaments;

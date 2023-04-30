@@ -13,7 +13,7 @@ router.post("/", async(req, res) => {
           return res.status(200).send(`The Dog ${name} was created succesfully!`)
         
     } catch (error) {
-        return res.status(404).send(error)
+        return res.status(404).send({msg: error})
     }
 });
 

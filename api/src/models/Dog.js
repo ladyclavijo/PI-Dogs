@@ -9,7 +9,6 @@ module.exports = (sequelize) => {
       type: DataTypes.UUID, //genera un ID único de forma aleatoria
       defaultValue: DataTypes.UUIDV4, // el valor por defecto del id será generado automáticamente mediante la función UUIDV4 de Sequelize
       primaryKey: true,
-      allowNull: false
     },
 
     name: {
@@ -18,12 +17,12 @@ module.exports = (sequelize) => {
     },
 
     height: {
-      type: DataTypes.STRING,
+      type: DataTypes.INTEGER,
       allowNull: false
     },
 
     weight: {
-      type: DataTypes.STRING,
+      type: DataTypes.INTEGER,
       allowNull: false
     },
 
@@ -37,7 +36,7 @@ module.exports = (sequelize) => {
       allowNull: false
     },
 
-    createdInDB: {
+    createdDB: {
       type: DataTypes.BOOLEAN,
       allowNull: false,
       defaultValue: true
