@@ -1,10 +1,10 @@
 const initialState = {  //el initialState se guarda en el store
     // objeto de estados globales
-        dogs: [],
-        copyDogs: [],
+        dogs: [], // muestra todos los dogs // renderiza la info de home // cuando hago el llamado por name, lo guardo aqui
+        copyDogs: [], // para comparar -- este estado no se toca
         temperaments: [],
         copyTemperaments: [],
-        detail: [] // guardo 1 solo dog
+        detail: [] // guardo 1 solo dog, para mostrar detalle (id)
     };
     
     function rootReducer (state= initialState, action) {
@@ -19,7 +19,7 @@ const initialState = {  //el initialState se guarda en el store
             case "GET_DOG_ID":
                 return{
                     ...state,
-                    dogs: action.payload
+                    detail: action.payload
                 };
     
             case "GET_DOG_NAME":
@@ -35,11 +35,11 @@ const initialState = {  //el initialState se guarda en el store
                     copyTemperaments: action.payload
                 };
     
-            case "FILTER_BY_TEMPERAMENTS": ////*************************************  pregunta
-                const allDogTemps = state.dogs;
+            case "FILTER_BY_TEMPERAMENTS": 
+                const allDogTemps = state.copyDogs;
                 const filterDogTemps = action.payload === "all" 
-                ? allDogTemps.filter(e => e.temperaments.length > 0) // puedo cambiarle el nombre a .temperaments ??? para no confundirlo con el estado global
-                : allDogTemps.filter(e => e.temperaments.find(e => e.name ? e.name === action.payload : e === action.payload))
+                ? allDogTemps.filter(e => e.temperament.length > 0) 
+                : allDogTemps.filter(e => e.temperament.find(e => e.name ? e.name === action.payload : e === action.payload))
                 return{
                     ...state,
                     dogs: filterDogTemps

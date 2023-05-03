@@ -1,0 +1,19 @@
+1. cuando me trae el dog creado, el temperament sale : [] 
+
+2-. pregunta del reducer con el case FILTER BY TEMPERAMENTS
+
+3-. Tipos de require
+
+Tipo           - Uso desde el back -  Enviado Front                     -  URL visto desde el back
+require params - req.params        - localhost3001/dogs/id              -       /dogs/:id
+require query  - req.query         - localhost3001/dogs?name=lulú       -       /dogs
+require body   - req.body          - "localhost3001/dogs", info         -       /dogs
+                                                          const info = {
+                                                                        "name": "Lady",
+                                                                        "image": "https://estaticos-cdn.prensaiberica.es/clip/823f515c-8143-4044-8f13-85ea1ef58f3a_16-9-discover-aspect-ratio_default_0.jpg",
+                                                                        "height": 50,
+                                                                        "weight": 4,
+                                                                        "life_span": 20,
+                                                                        "temperament": ["Curious", "Playful", "Fun-loving"]
+                                                                       }
+

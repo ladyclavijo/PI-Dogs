@@ -7,7 +7,7 @@ const getDogsByNameDb = require("../controllers/getDogsByNameDb");
 router.get("/", async (req, res) => {
 
     try {
-        const { name } = req.query;
+        const { name } = req.query; 
         
         if (name) {
             const apiDogsByName = await getDogsByNameApi(name);
