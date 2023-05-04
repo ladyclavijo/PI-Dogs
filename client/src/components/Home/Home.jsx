@@ -45,7 +45,7 @@ function Home () {
     }, dispatch)
 
 
-    function handleSort(e) {
+    function handleOrderingByName(e) {
         e.preventDefault();
         dispatch(orderByName(e.target.value));
         setCurrentPage(1)
@@ -59,14 +59,14 @@ function Home () {
         setOrder(`Organized ${e.target.value}`)
     }
 
-    function handleFilterCreated(e) {
+    function handleFilterBySource(e) {
         e.preventDefault();
         dispatch(createDog(e.target.value));
         setCurrentPage(1)
         setOrder(`Organized ${e.target.value}`)
     }
 
-    function handleButton() {
+    function handleClearFilter() {
         history.go(0)
     }
 
@@ -79,17 +79,16 @@ function Home () {
             </div>
 
             <div>
-                <select onChange={handleSort}>
+                <select onChange={handleOrderingByName}>
                     <option value= "default" hidden>Order By Name</option>
                     <option value= "asc">A - Z</option>
                     <option value= "desc">Z - A</option>
                 </select>
                                       
-                <select onChange={handleFilterCreated}>
-                    <option value= "default" hidden>Order By Source</option>
-                    <option value= "all">All Dogs</option>
-                    <option value= "createdDB">Dogs Created</option>
-                    <option value= "byApi">Dogs Api</option>
+                <select defaultValue="default" className="container-select" onChange={handleFilterBySource}>
+                    <option className="container-select__option" value= "default" hidden>Order By Source</option>
+                    <option className="container-select__option" value= "createdDB">Dogs Created</option>
+                    <option className="container-select__option" value= "byApi">Dogs Api</option>
                 </select>
 
                 <select onChange={handleFilterTemperaments}>
@@ -99,7 +98,7 @@ function Home () {
                         ))}
                 </select>
                                
-             <button onClick={e => handleButton(e)}>Clear</button>
+             <button className="container-btn" onClick={handleClearFilter}>Clear Filters</button>
             
             </div>
 
@@ -116,25 +115,25 @@ function Home () {
                 />
             </div>
 
-    // si Loading es true, se renderiza Loading, de lo contrario se renderiza la lista de componentes Card
+    {/* si Loading es true, se renderiza Loading, de lo contrario se renderiza la lista de componentes Card*/}
             {isLoading ? <Loading/> : <div className="container">
-                                      <div className="container-cards">
-                                        {currentDogs?.map(e => {
-                                          return (
-                                            <Link to={`/detail/${e.id}`}>
-                                               <Card id={e.id}
-                                                   name={e.name}
-                                                   image={e.image}
-                                                   life_span={e.life_span}
-                                                   height={e.height}
-                                                   weight={e.weight}
-                                                   key={e.id} 
-                                                    />
-                                           </Link>
-                                          )
-                                        })}
-                                      </div>
-                                      </div>
+                <div className="container-cards">
+                    {currentDogs?.map(e => {
+                        return (
+                            <Link to={`/detail/${e.id}`}>
+                                <Card id={e.id}
+                                      name={e.name}
+                                      image={e.image}
+                                      life_span={e.life_span}
+                                      height={e.height}
+                                      weight={e.weight}
+                                      key={e.id} 
+                                />
+                            </Link>
+                        )
+                    })}
+                </div>
+            </div>
             }
 
         </div>

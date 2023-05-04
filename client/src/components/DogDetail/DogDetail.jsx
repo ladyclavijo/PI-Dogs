@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, useHistory } from "react-router-dom";
-import { getDogId } from "../../redux/actions/index";
+import { getDogId, clearDetail } from "../../redux/actions/index";
 
 const CardDetail = () => {
 
@@ -14,7 +14,10 @@ const CardDetail = () => {
 
     useEffect(() => {
         dispatch(getDogId(id)) //obtengo la info del dog
-    }, [dispatch, id])
+        return () => {
+            dispatch(clearDetail())
+        }
+    }, [dispatch, id]);
 
     const handleBack = () => {
         history.goBack();
@@ -22,7 +25,6 @@ const CardDetail = () => {
 
     return (
         <div className="container-detail">
-
             <div className="detail-image">
                 <img src={dog.image} alt="no image"/>
             </div>

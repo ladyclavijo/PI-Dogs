@@ -3,43 +3,48 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, useHistory } from "react-router-dom"
 import { getAllDogs, getAllTemperaments, createDog} from "../../redux/actions/index";
 
-const validate = (input) => {
-    let errors = {};
-
-    if(!input.name) {
-        errors.name = "Name must be completed"
-    }
-
-    if(!input.image) {
-        errors.image = "Image must be completed"
-    }
-
-    if(!input.height) {
-        errors.height = "Height must be completed"
-    }
-    
-    if(!input.weight) {
-        errors.weight = "Weight must be completed"
-    }
-
-    if(!input.life_span) {
-        errors.life_span = "Life span must be completed"
-    }
-        
-    if(!input.temperament.length) { 
-        errors.temperament = "At least one temperament must be selected"      
-    }
-    return errors;
-};
-
 const Form = () => {
-
+    
     const dispatch = useDispatch();
     const history = useHistory();
     const dogs = useSelector(state => state.copyDogs);
     const temperaments = useSelector(state => state.copyTemperaments);
     const [error, setError] = useState({});
+    const dogsCheck = dogs.map(e => e.name);
     
+    const validate = (input) => {
+        let errors = {};
+
+        if(!input.name) {
+            errors.name = "Name must be completed"
+        }
+
+        if(!input.image) {
+            errors.image = "Image must be completed"
+        }
+
+        if(!input.height) {
+            errors.height = "Height must be completed"
+        }
+        
+        if(!input.weight) {
+            errors.weight = "Weight must be completed"
+        }
+
+        if(!input.life_span) {
+            errors.life_span = "Life span must be completed"
+        }
+            
+        if(!input.temperament.length) { 
+            errors.temperament = "At least one temperament must be selected"      
+        }
+
+        if (dogsCheck.includes(input.name.toLowerCase())) {
+            errors.name = "This dog already exists";
+        }
+        return errors;
+    };
+
 
     useEffect(() => {
         dispatch(getAllDogs());
@@ -56,6 +61,7 @@ const Form = () => {
     });
 
     const handleChange = (e) => {
+
         setInput({
             ...input,
             [e.target.name]: e.target.value,
@@ -68,7 +74,6 @@ const Form = () => {
     };
 
     const handleSelect = (e) => {
-        
         setInput({
             ...input,
             temperament: [...input.temperament, e.target.value]
@@ -87,10 +92,25 @@ const Form = () => {
             temperament: input.temperament.filter(t => t !== temperament)
         }, dogsCheck));       
     };
-  
 
+    const handleCheckErrors = (e) => {
+        e.preventDefault();
+        setError(validate({
+            ...input,
+            [e.target.name]: e.target.value,
+        },dogsCheck));
+    };
+            
+  
     const handleSubmit = (e) => {
         e.preventDefault();
+
+        const errors = validate(input, dogsCheck);
+        if (Object.keys(errors).length > 0) {
+            setError(errors);
+            return;
+        }
+
 
         dispatch(createDog(input));
 
@@ -109,7 +129,7 @@ const Form = () => {
     return(
 
         <div>
-            <h1 className="tittle">Create your Dog!</h1>
+            <h1 className="tittle">Create your Doggy!</h1>
             <div className="container-form">
                 <form onSubmit={handleSubmit}>
 
@@ -200,10 +220,22 @@ const Form = () => {
                          ))}
                       </div>               
                     </div>
+
+                    <div>
+                    {error.name ||
+                     error.image ||
+                     error.height||
+                     error.weight||
+                     error.life_span||
+                     error.temperament ?
+                    <button type="submit" className="form-button">Create</button>
+                    : <button className="btn" onClick={e => handleCheckErrors(e)}>Create</button>
+                    }
+                    </div>
                                
                 </form>
 
-                <Link to="/home"><button>Go Home</button></Link>
+                <Link to="/home"><button>GO HOME</button></Link>
 
             </div>
         </div>

@@ -1,3 +1,4 @@
+import "../Pagination/Pagination.css";
 import React from "react";
 
 const Pagination = ({ dogsPerPage, dogs, pagination }) => {
@@ -8,16 +9,14 @@ const Pagination = ({ dogsPerPage, dogs, pagination }) => {
     }
     return(
         <nav>
-            <ul>
+            <ul className="pagination">
                 {pageNumbers && pageNumbers.map(number => {
                     return(
-                        <li key={number}>
-                            <button onClick={() => pagination(number)}>
-                                {number}
-                            </button>
-                        </li>
+                    <li className="number" key={number}>
+                    <button onClick={() => pagination(number)}>{number}</button>
+                    </li>
                     )
-                })}
+                    })}
             </ul>
         </nav>
     )

@@ -103,7 +103,7 @@ export const orderByTemperament = (payload) => {
     return(dispatch) => {
         try {
             return dispatch({
-                type: "ORDER_BY_NAME",
+                type: "ORDER_BY_TEMPERAMENT",
                 payload
             })            
         } catch (error) {
@@ -112,12 +112,30 @@ export const orderByTemperament = (payload) => {
     }
 };
 
+
+export const filterBySource = (payload) => {
+    return (dispatch) => {
+        return dispatch({
+            type: "FILTER_BY_SOURCE",
+            payload
+        })
+    }
+}
+
   
 export const currentPage = (payload) => {
     return (dispatch) => {
         return dispatch({
             type: "CURRENT_PAGE",
             payload
+        })
+    }
+};
+
+export const clearDetail = () => {
+    return(dispatch) => {
+        return dispatch({
+            type: "CLEAR_DETAIL"
         })
     }
 };

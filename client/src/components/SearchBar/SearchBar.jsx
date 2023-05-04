@@ -14,8 +14,19 @@ export default function SearchBar() {
         setName(e.target.value.toLowerCase());
     }
 
-    function handleButton(e) {
+    function handleFormSubmit(e) {
         e.preventDefault();
+        handleSearch();
+    }
+
+    function handleKeyPress(e){
+        if (e.key === "Enter") {
+            handleSearch();
+        }
+    }
+
+
+    function handleSearch() {
         const searchDog = getDogName(name) //name va a ser mi estado local, ahí voy guardando lo que va tipeando el usuario
         dispatch(searchDog)
         setName("")
@@ -23,13 +34,13 @@ export default function SearchBar() {
 
     return (
         <div>
-            <form>
+            <form onSubmit={handleFormSubmit}>
                 <input type="text"
-                   onChange={e => handleInput(e)}
+                onChange={(e) => handleInput(e)}
                 placeholder="Search a Dog"/>
 
-                <Link to={`/home?name={name}`}>
-                    <button type="submit" onClick={e => handleButton(e)}>Search</button>
+                <Link to={`/home?name=${name}`}>
+                    <button type="submit" onClick={(e) => handleKeyPress(e)}>Search</button>
                 </Link>
             </form>
         </div>
