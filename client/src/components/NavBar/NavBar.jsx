@@ -9,7 +9,7 @@ const NavBar = () => {
             </Link>
 
             <Link to="/newDog">
-                <div>New Pokemon</div>
+                <div>New Doggy</div>
             </Link>
         </div>
     )

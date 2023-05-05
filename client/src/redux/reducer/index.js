@@ -2,8 +2,8 @@ const initialState = {  //el initialState se guarda en el store
     // objeto de estados globales
         dogs: [], // muestra todos los dogs // renderiza la info de home // cuando hago el llamado por name, lo guardo aqui
         copyDogs: [], // para comparar -- este estado no se toca
-        temperaments: [],   
-        detail: [] // guardo 1 solo dog, para mostrar detalle (id)
+        temperaments: [],
+        dogDetail: [] // guardo 1 solo dog, para mostrar detalle (id)
     };
     
     function rootReducer (state= initialState, action) {
@@ -16,9 +16,10 @@ const initialState = {  //el initialState se guarda en el store
                 };
     
             case "GET_DOGS_ID":
+                console.log(action.payload)
                 return{
                     ...state,
-                    detail: action.payload
+                    dogDetail: action.payload
                 };
     
             case "GET_DOGS_NAME":
@@ -36,8 +37,8 @@ const initialState = {  //el initialState se guarda en el store
             case "FILTER_BY_TEMPERAMENTS": 
                 const allDogTemps = state.copyDogs;
                 const filterDogTemps = action.payload === "all" 
-                ? allDogTemps.filter(e => e.temperaments.length > 0) 
-                : allDogTemps.filter(e => e.temperaments.find(e => e.name ? e.name === action.payload : e === action.payload))
+                ? {...state, dogs: state.copyDogs}
+                : allDogTemps.filter(e => e?.temperament?.includes(action.payload))
                 return{
                     ...state,
                     dogs: filterDogTemps
@@ -75,9 +76,10 @@ const initialState = {  //el initialState se guarda en el store
 
 
             case "FILTER_BY_SOURCE":
-                const allDog2 = state.allDogs
-                const filterDog2 = action.payload === "DB" ? allDog2.filter(d => d.createdDB)
-                : allDog2.filter(d => !d.createdDB)
+                let allDog2 = state.copyDogs
+                let filterDog2 = action.payload === "createdDB" ? allDog2?.filter(d => d.createdDB)
+                : allDog2?.filter(d => !d.createdDB)
+
                 return{
                     ...state,
                     dogs: filterDog2,
@@ -94,7 +96,7 @@ const initialState = {  //el initialState se guarda en el store
                 return{
                     ...state,
                     dogs: [],
-                    copyDogs: []
+                    // copyDogs: []
                 }
     
         default: return state;

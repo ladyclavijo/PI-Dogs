@@ -39,9 +39,6 @@ const Form = () => {
             errors.temperament = "At least one temperament must be selected"      
         }
 
-        if (dogsCheck.includes(input.name.toLowerCase())) {
-            errors.name = "This dog already exists";
-        }
         return errors;
     };
 
@@ -51,6 +48,7 @@ const Form = () => {
         dispatch(getAllTemperaments());
     }, [dispatch])
 
+    
     const [input, setInput] = useState({
         name: "",
         image: "",
@@ -70,7 +68,7 @@ const Form = () => {
         setError(validate({
             ...input,
             [e.target.name]: e.target.value,
-        }, dogsCheck));
+        }));
     };
 
     const handleSelect = (e) => {
@@ -90,22 +88,23 @@ const Form = () => {
         setError(validate({
             ...input,
             temperament: input.temperament.filter(t => t !== temperament)
-        }, dogsCheck));       
+        }));       
     };
+
 
     const handleCheckErrors = (e) => {
         e.preventDefault();
         setError(validate({
             ...input,
             [e.target.name]: e.target.value,
-        },dogsCheck));
+        }));
     };
             
   
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        const errors = validate(input, dogsCheck);
+        const errors = validate(input);
         if (Object.keys(errors).length > 0) {
             setError(errors);
             return;
@@ -184,7 +183,6 @@ const Form = () => {
                     </div>
 
 
-
                     <div className="form-input">
                         <label className="form-label">Life_span: </label>
                         <input value={input.life_span}
@@ -205,7 +203,7 @@ const Form = () => {
 
                     <div className="form-input">
                       <label className="form-label">Temperament: </label>
-                      <select name= "temperament" onChange={handleSelect}>
+                      <select name="temperament" onChange={handleSelect}>
                           <option hidden value="default">Select a Temperament</option>
                           {temperaments.map((t) => (
                             <option value={t.name}>{t.name}</option>

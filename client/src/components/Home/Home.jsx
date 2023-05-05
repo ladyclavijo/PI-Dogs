@@ -2,10 +2,10 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { createDog, filterByTemperaments, getAllDogs, getAllTemperaments, orderByName } from "../../redux/actions/index";
+import { filterBySource, filterByTemperaments, getAllDogs, getAllTemperaments, orderByName } from "../../redux/actions/index";
 
 //importo los components necesarios
-import Card from "../Card/Card";
+import DogCard from "../Card/DogCard";
 import NavBar from "../NavBar/NavBar";
 import Loading from "../Loading/Loading";
 import SearchBar from "../SearchBar/SearchBar"
@@ -14,7 +14,7 @@ import Pagination from "../Pagination/Pagination";
 
 function Home () {
 
-    const dispatch = useDispatch();
+    const dispatch = useDispatch(); 
     const history = useHistory();
 
     const dogs = useSelector(state => state.dogs);  //me trae del reducer el estado "pokemons"  
@@ -29,7 +29,7 @@ function Home () {
     const indexOfLastDog = currentPage * dogsPerPage; 
     const indexOfFirstDog = indexOfLastDog - dogsPerPage;
 
-    const currentDogs = dogs.slice(indexOfFirstDog, indexOfLastDog);
+    const currentDogs = dogs?.slice(indexOfFirstDog, indexOfLastDog);
     
     const [isLoading, setIsLoading] = useState(true);
 
@@ -42,7 +42,7 @@ function Home () {
         dispatch(getAllDogs());
         dispatch(getAllTemperaments())
         setIsLoading(false);
-    }, dispatch)
+    }, [dispatch])
 
 
     function handleOrderingByName(e) {
@@ -57,11 +57,13 @@ function Home () {
         dispatch(filterByTemperaments(e.target.value));
         setCurrentPage(1)
         setOrder(`Organized ${e.target.value}`)
+        console.log(e)
     }
+    
 
     function handleFilterBySource(e) {
         e.preventDefault();
-        dispatch(createDog(e.target.value));
+        dispatch(filterBySource(e.target.value));
         setCurrentPage(1)
         setOrder(`Organized ${e.target.value}`)
     }
@@ -91,7 +93,7 @@ function Home () {
                     <option className="container-select__option" value= "byApi">Dogs Api</option>
                 </select>
 
-                <select onChange={handleFilterTemperaments}>
+                <select onChange={(e) => handleFilterTemperaments(e)}>
                     <option value= "all" hidden>All Temperaments</option>
                         {temperaments?.map((t) => (
                             <option key={t.id} value={t.name}>{t.name}</option>
@@ -110,7 +112,7 @@ function Home () {
             <div className="home-pagination">
                 <Pagination 
                     dogsPerPage={dogsPerPage}
-                    dogs={dogs.length}
+                    dogs={dogs?.length}
                     pagination={pagination}
                 />
             </div>
@@ -120,14 +122,13 @@ function Home () {
                 <div className="container-cards">
                     {currentDogs?.map(e => {
                         return (
-                            <Link to={`/detail/${e.id}`}>
-                                <Card id={e.id}
-                                      name={e.name}
-                                      image={e.image}
-                                      life_span={e.life_span}
-                                      height={e.height}
-                                      weight={e.weight}
-                                      key={e.id} 
+                            <Link to={`/detail/${e.id}`} key={e.id}>
+                                <DogCard id={e.id}
+                                    name={e.name}
+                                    image={e.image}
+                                    temperament={e.temperament}
+                                    weight={e.weight}
+                                    key={e.id} 
                                 />
                             </Link>
                         )
