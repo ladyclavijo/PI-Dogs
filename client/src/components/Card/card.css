@@ -1,0 +1,68 @@
+.container-card {
+    display: flex;
+    width: 500px; 
+    height: 300px;
+    border-radius: 15px;
+    border: none;
+    background-color: aliceblue;
+    border-radius: 25px;
+    overflow: hidden;
+    box-shadow: 3px 6px 6px #bdb7b7;
+}
+
+.container-image {
+    width: 50%;
+    height: 100%;
+}
+
+.container-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.info-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 50%;
+    justify-content: space-between;
+    height: 100%;
+    padding: 20px;
+    text-align: center;
+}
+
+.card-title {
+    color:rgb(197, 110, 28);
+    font-size: 30px;
+    
+}
+
+.middle-cards {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    color: red;
+    width: auto;
+    margin: 10px;
+}
+
+.temperaments-div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    border: 2px solid red;
+    padding: 5px 25px;
+}
+
+.temps-title {
+    font-size: 16px;
+    color: brown;
+}
+
+.temps {
+    color: blue;
+    font-size: 12px;
+}
