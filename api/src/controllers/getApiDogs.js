@@ -10,22 +10,22 @@ const getApiDogs = async() => {
         
     const urlDogs = await axios.get(`https://api.thedogapi.com/v1/breeds?api_key=${API_KEY}`); //hago destructuring de la data de axios
     const apiData = urlDogs.data.map(e => {
-    // const convertTemps = e.temperament.split(","); // lo convierte a array
+    
         
         return {
             id: e.id,
             name: e.name,
             image: e.image.url,
-            height: e.height.metric,
+            height: e.height.metric.metric,
             weight: e.weight.metric,
             life_span: e.life_span,
-            temperament: e.temperament,
+            temperaments: e.temperament, 
             createdDB: false        
         };
             
     })
-    console.log(apiData)
-    
+    // console.log(apiData)
+   
     return apiData;  //espera y retorna el nuevo arreglo
 };
 

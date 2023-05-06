@@ -38,7 +38,7 @@ const initialState = {  //el initialState se guarda en el store
                 const allDogTemps = state.copyDogs;
                 const filterDogTemps = action.payload === "all" 
                 ? {...state, dogs: state.copyDogs}
-                : allDogTemps.filter(e => e?.temperament?.includes(action.payload))
+                : allDogTemps.filter(e => e?.temperaments?.includes(action.payload))
                 return{
                     ...state,
                     dogs: filterDogTemps

@@ -3,22 +3,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, useHistory } from "react-router-dom"
 import { getAllDogs, getAllTemperaments, createDog} from "../../redux/actions/index";
 
-const Form = () => {
+const validate = (input) => {
+    let errors = {};
     
-    const dispatch = useDispatch();
-    const history = useHistory();
-    const dogs = useSelector(state => state.copyDogs);
-    const temperaments = useSelector(state => state.copyTemperaments);
-    const [error, setError] = useState({});
-    const dogsCheck = dogs.map(e => e.name);
-    
-    const validate = (input) => {
-        let errors = {};
-
-        if(!input.name) {
+    if(!input.name) {
             errors.name = "Name must be completed"
         }
-
+        
         if(!input.image) {
             errors.image = "Image must be completed"
         }
@@ -34,14 +25,23 @@ const Form = () => {
         if(!input.life_span) {
             errors.life_span = "Life span must be completed"
         }
-            
+        
         if(!input.temperament.length) { 
             errors.temperament = "At least one temperament must be selected"      
         }
-
+        
         return errors;
     };
+    
+    const Form = () => {
+        
+        const dispatch = useDispatch();
+        const history = useHistory();
+        const dogs = useSelector(state => state.copyDogs);
+        const temperaments = useSelector(state => state.copyTemperaments);
 
+        const [error, setError] = useState({});
+        
 
     useEffect(() => {
         dispatch(getAllDogs());
@@ -55,7 +55,7 @@ const Form = () => {
         height: "",
         weight: "",
         life_span: "",
-        temperament: []
+        temperament: "", //***************************
     });
 
     const handleChange = (e) => {
@@ -64,17 +64,12 @@ const Form = () => {
             ...input,
             [e.target.name]: e.target.value,
         });
-
-        setError(validate({
-            ...input,
-            [e.target.name]: e.target.value,
-        }));
     };
 
     const handleSelect = (e) => {
         setInput({
             ...input,
-            temperament: [...input.temperament, e.target.value]
+            temperaments: [...input.temperament, e.target.value]
         })
     };
 
@@ -82,12 +77,12 @@ const Form = () => {
     const handleDelete = (temperament) => {
         setInput({
             ...input,
-            temperament: input.temperament.filter(t => t !== temperament)
+            temperaments: input.temperament.filter(t => t !== temperament)
         })
     
         setError(validate({
             ...input,
-            temperament: input.temperament.filter(t => t !== temperament)
+            temperaments: input.temperament.filter(t => t !== temperament)
         }));       
     };
 
@@ -120,7 +115,7 @@ const Form = () => {
             height: "",
             weight: "",
             life_span: "",
-            temperament: []
+            temperament: "",
         })
         history.push("/home")
     };
@@ -206,31 +201,19 @@ const Form = () => {
                       <select name="temperament" onChange={handleSelect}>
                           <option hidden value="default">Select a Temperament</option>
                           {temperaments.map((t) => (
-                            <option value={t.name}>{t.name}</option>
+                            <option key={t.name} value={t.name}>{t.name}</option>
                           ))}
                       </select>
 
                       <div className='temperaments-select'>
                          {input.temperament.map((temperament, index) => (
-                             <div className='form-temperaments_delete' key={index}>{temperament}
+                             <div className='form-temperaments__div' key={index}>{temperament}
                              <button onClick={() => handleDelete(temperament)}>x</button>
                              </div>
                          ))}
                       </div>               
                     </div>
 
-                    <div>
-                    {error.name ||
-                     error.image ||
-                     error.height||
-                     error.weight||
-                     error.life_span||
-                     error.temperament ?
-                    <button type="submit" className="form-button">Create</button>
-                    : <button className="btn" onClick={e => handleCheckErrors(e)}>Create</button>
-                    }
-                    </div>
-                               
                 </form>
 
                 <Link to="/home"><button>GO HOME</button></Link>

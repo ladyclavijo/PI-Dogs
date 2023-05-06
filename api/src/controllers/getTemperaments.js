@@ -10,7 +10,7 @@ const allTemperaments = async () => {
  
     const temps = await axios.get(`https://api.thedogapi.com/v1/breeds?api_key=${API_KEY}`) //me traigo en forma de arreglo los temperaments
 
-    temps.data.forEach(e => { // analizo cada elemento del arreglo de razas
+    temps.data.forEach(e => { // analizo cada elemento del arreglo
         if (e.temperament){
             let foundTemps = e.temperament.split(", ");
 //Esta parte del código es importante xq divide los temperamentos de las razas de dogs en temperamentos
@@ -24,6 +24,7 @@ const allTemperaments = async () => {
         }
     });
      const findTemps = await Temperament.findAll(); 
+     console.log(findTemps)
      return findTemps; //devuelve todos los temperamentos almacenados en la BD usand findAll
     
     } catch (error) {

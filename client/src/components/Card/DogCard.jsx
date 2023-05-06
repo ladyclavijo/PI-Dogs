@@ -1,9 +1,17 @@
 import React from "react";
 // import { Link } from "react-router-dom";
 
-const DogCard = ({id, name, image, temperament, weight}) => { // me lo traigo por props
+const DogCard = ({name, image, temperaments, weight}) => { // me lo traigo por props
 
-    const temps = temperament?.split(", ");
+    let temps;
+    if (typeof temperaments === "string") {
+        temps = temperaments.split(", ");
+        console.log(temps + "entré al if")
+    } else { 
+        temps = temperaments
+        console.log(temperaments + "no entré al if")
+    }
+
 
     return (
       <div className="container-card">
@@ -19,7 +27,7 @@ const DogCard = ({id, name, image, temperament, weight}) => { // me lo traigo po
         <div className="temperaments-div">
             <p>Temperaments: </p>
             {temps?.map(e => {
-                return <p key={e}>{e}</p>
+                return <p key={e.name ? e.name : e}>{e.name ? e.name : e}</p>
             })}
         </div>
 

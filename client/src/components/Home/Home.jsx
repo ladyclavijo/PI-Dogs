@@ -1,3 +1,4 @@
+import "./home.css"
 import React from "react";
 import { useState, useEffect } from "react";
 import { Link, useHistory } from "react-router-dom";
@@ -17,7 +18,7 @@ function Home () {
     const dispatch = useDispatch(); 
     const history = useHistory();
 
-    const dogs = useSelector(state => state.dogs);  //me trae del reducer el estado "pokemons"  
+    const dogs = useSelector(state => state.dogs);  //me trae del reducer el estado "dogs"  
     const temperaments = useSelector(state => state.temperaments);
     
     const [order, setOrder] = useState(""); // estado local que arranca vacío
@@ -74,26 +75,26 @@ function Home () {
 
 // renderizo
     return (
-        <div>
+        <div className="container-home">
 
-            <div>
+            <div className="nav-container">
                 <NavBar/>
-            </div>
+            
 
             <div>
-                <select onChange={handleOrderingByName}>
+                <select className="container-alphabetical" onChange={handleOrderingByName}>
                     <option value= "default" hidden>Order By Name</option>
                     <option value= "asc">A - Z</option>
                     <option value= "desc">Z - A</option>
                 </select>
                                       
-                <select defaultValue="default" className="container-select" onChange={handleFilterBySource}>
+                <select className="container-select" onChange={handleFilterBySource}>
                     <option className="container-select__option" value= "default" hidden>Order By Source</option>
                     <option className="container-select__option" value= "createdDB">Dogs Created</option>
                     <option className="container-select__option" value= "byApi">Dogs Api</option>
                 </select>
 
-                <select onChange={(e) => handleFilterTemperaments(e)}>
+                <select className="container-temps" onChange={(e) => handleFilterTemperaments(e)}>
                     <option value= "all" hidden>All Temperaments</option>
                         {temperaments?.map((t) => (
                             <option key={t.id} value={t.name}>{t.name}</option>
@@ -103,8 +104,9 @@ function Home () {
              <button className="container-btn" onClick={handleClearFilter}>Clear Filters</button>
             
             </div>
+            </div>
 
-            <div>
+            <div className="container-searchBar">
                 <SearchBar/>
             </div>
 
@@ -118,7 +120,7 @@ function Home () {
             </div>
 
     {/* si Loading es true, se renderiza Loading, de lo contrario se renderiza la lista de componentes Card*/}
-            {isLoading ? <Loading/> : <div className="container">
+            {isLoading ? <Loading/> : <div>
                 <div className="container-cards">
                     {currentDogs?.map(e => {
                         return (
@@ -126,7 +128,7 @@ function Home () {
                                 <DogCard id={e.id}
                                     name={e.name}
                                     image={e.image}
-                                    temperament={e.temperament}
+                                    temperaments={e.temperaments}
                                     weight={e.weight}
                                     key={e.id} 
                                 />
