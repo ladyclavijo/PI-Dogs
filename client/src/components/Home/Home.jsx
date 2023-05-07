@@ -81,7 +81,7 @@ function Home () {
                 <NavBar/>
             
 
-            <div>
+            <div className="all-containers">
                 <select className="container-alphabetical" onChange={handleOrderingByName}>
                     <option value= "default" hidden>Order By Name</option>
                     <option value= "asc">A - Z</option>
@@ -101,7 +101,7 @@ function Home () {
                         ))}
                 </select>
                                
-             <button className="container-btn" onClick={handleClearFilter}>Clear Filters</button>
+             <button className="clear-button" onClick={handleClearFilter}>Clear Filters</button>
             
             </div>
             </div>
@@ -111,13 +111,6 @@ function Home () {
             </div>
 
 
-            <div className="home-pagination">
-                <Pagination 
-                    dogsPerPage={dogsPerPage}
-                    dogs={dogs?.length}
-                    pagination={pagination}
-                />
-            </div>
 
     {/* si Loading es true, se renderiza Loading, de lo contrario se renderiza la lista de componentes Card*/}
             {isLoading ? <Loading/> : <div>
@@ -138,6 +131,15 @@ function Home () {
                 </div>
             </div>
             }
+
+            
+            <div className="home-pagination">
+                <Pagination 
+                    dogsPerPage={dogsPerPage}
+                    dogs={dogs?.length}
+                    pagination={pagination}
+                />
+            </div>
 
         </div>
     )

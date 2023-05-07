@@ -1,3 +1,4 @@
+import "./searchBar.css";
 import React, {useState} from "react";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
@@ -22,15 +23,19 @@ export default function SearchBar() {
     }
 
     return (
-        <div>
+        <div className="search-bar">
             <form>
-                <input type="text"
+                <div className="input-container">
+                <input className="input-text" type="text"
                 onChange={(e) => handleInput(e)}
-                placeholder="Search a Dog"/>
+                placeholder="Search a Dog ..."/>
+                </div>
 
+                <div className="button-container">
                 <Link to={`/home?name=${name}`}>
-                    <button type="submit" onClick={(e) => handleButton(e)}>Search</button>
+                    <button className="search-button" type="submit" onClick={(e) => handleButton(e)}>Search</button>
                 </Link>
+                </div>
             </form>
         </div>
     )

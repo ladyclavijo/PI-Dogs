@@ -26,8 +26,8 @@ const validate = (input) => {
             errors.life_span = "Life span must be completed"
         }
         
-        if(!input.temperament.length) { 
-            errors.temperament = "At least one temperament must be selected"      
+        if(!input.temperaments.length) { 
+            errors.temperaments = "At least one temperament must be selected"      
         }
         
         return errors;
@@ -38,8 +38,7 @@ const validate = (input) => {
         const dispatch = useDispatch();
         const history = useHistory();
         const dogs = useSelector(state => state.copyDogs);
-        const temperaments = useSelector(state => state.copyTemperaments);
-
+        const temperaments = useSelector(state => state.temperaments);
         const [error, setError] = useState({});
         
 
@@ -52,10 +51,10 @@ const validate = (input) => {
     const [input, setInput] = useState({
         name: "",
         image: "",
-        height: "",
-        weight: "",
-        life_span: "",
-        temperament: "", //***************************
+        height: 0,
+        weight: 0,
+        life_span: 0,
+        temperaments: [],
     });
 
     const handleChange = (e) => {
@@ -69,20 +68,20 @@ const validate = (input) => {
     const handleSelect = (e) => {
         setInput({
             ...input,
-            temperaments: [...input.temperament, e.target.value]
+            temperaments: [...input.temperaments, e.target.value]
         })
     };
 
 
-    const handleDelete = (temperament) => {
+    const handleDelete = (temperaments) => {
         setInput({
             ...input,
-            temperaments: input.temperament.filter(t => t !== temperament)
+            temperaments: input.temperaments.filter(t => t !== temperaments)
         })
     
         setError(validate({
             ...input,
-            temperaments: input.temperament.filter(t => t !== temperament)
+            temperaments: input.temperaments.filter(t => t !== temperaments)
         }));       
     };
 
@@ -112,10 +111,10 @@ const validate = (input) => {
         setInput({
             name: "",
             image: "",
-            height: "",
-            weight: "",
-            life_span: "",
-            temperament: "",
+            height: 0,
+            weight: 0,
+            life_span: 0,
+            temperaments: [],
         })
         history.push("/home")
     };
@@ -136,6 +135,7 @@ const validate = (input) => {
                                placeholder="Enter a name"
                                onChange={handleChange}
                         />
+
                         {
                             error.name && (
                                 <p>{error.name}</p>
@@ -147,12 +147,15 @@ const validate = (input) => {
                     <div className="form-input">
                         <label className="form-label">Height: </label>
                         <input value={input.height}
-                               type="number"
+                               type="range"
+                               min='0'
+                               max='100'
                                name="height"
                                autoComplete="off"
                                placeholder="0"
                                onChange={handleChange}
                         />
+                        {<p>{input.height}</p>}
                         {
                             error.height && (
                                 <p>{error.height}</p>
@@ -164,12 +167,15 @@ const validate = (input) => {
                     <div className="form-input">
                         <label className="form-label">Weight: </label>
                         <input value={input.weight}
-                               type="number"
+                               type="range"
+                               min='0'
+                               max='100'
                                name="weight"
                                autoComplete="off"
                                placeholder="0"
                                onChange={handleChange}
                         />
+                        {<p>{input.weight}</p>}
                         {
                             error.weight && (
                                 <p>{error.weight}</p>
@@ -181,13 +187,15 @@ const validate = (input) => {
                     <div className="form-input">
                         <label className="form-label">Life_span: </label>
                         <input value={input.life_span}
-                               type="number"
+                               type="range"
+                               min='0'
+                               max='100'
                                name="life_span"
                                autoComplete="off"
                                placeholder="0"
                                onChange={handleChange}
                         />
-                        
+                        {<p>{input.life_span}</p>}                        
                         {
                             error.life_span && (
                                 <p>{error.life_span}</p>
@@ -200,19 +208,21 @@ const validate = (input) => {
                       <label className="form-label">Temperament: </label>
                       <select name="temperament" onChange={handleSelect}>
                           <option hidden value="default">Select a Temperament</option>
-                          {temperaments.map((t) => (
+                          {temperaments?.map((t) => (
                             <option key={t.name} value={t.name}>{t.name}</option>
                           ))}
                       </select>
 
                       <div className='temperaments-select'>
-                         {input.temperament.map((temperament, index) => (
-                             <div className='form-temperaments__div' key={index}>{temperament}
-                             <button onClick={() => handleDelete(temperament)}>x</button>
+                         {input.temperaments.map((temperaments, index) => (
+                             <div className='form-temperaments__div' key={index}>{temperaments}
+                             <button onClick={() => handleDelete(temperaments)}>x</button>
                              </div>
                          ))}
                       </div>               
                     </div>
+
+                    <button type="submit">Create!</button> 
 
                 </form>
 

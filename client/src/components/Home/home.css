@@ -1,15 +1,25 @@
+body {
+  margin-top: 0;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow:auto;
+}
+
+
 .container-home {
     background-image: url("../../images/home.jpg");
     background-position: center center;
     background-size: cover;
-    min-height: 100vh;
-    padding-top: 60px;
+    background-repeat: no-repeat;
+    height: 100%;
+    width: 100%;
+    background-attachment: fixed;     /* para dejar fija la img de fondo y que no se modifique de tamaño */
+    padding-bottom: 30px;
   }
-
-  body {
-    margin: 0;
-    padding: 0;
-  } 
   
   .nav-container {
     display: flex;
@@ -17,8 +27,14 @@
     align-items: center;
     margin-bottom: 20px;
     color: white;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    margin-top: -20px; /*renglon superiorrrrrr*/
     font-size: 20px;
+  }
+
+  .all-containers {
+    justify-content: center;
+    margin-top: 20px;
+    margin-right: 50px;
   }
   
   .container-alphabetical,
@@ -30,10 +46,10 @@
     border: none;
     font-size: 16px;
     font-weight: bold;
-    margin-right: 10px;
+    margin-right: 10px;    
   }
   
-  .container-btn {
+  .clear-button {
     padding: 10px;
     border-radius: 5px;
     background-color: rgba(255, 255, 255, 0.8);
@@ -43,15 +59,22 @@
     margin-right: 10px;
     cursor: pointer;
   }
+
+.clear-button:hover {
+    background-color: rgb(255, 255, 255);
+    color: #000;
+}
+  
   
   .container-searchBar {
-    margin: 20px 0;
+    margin-left: auto;
+    width: 94%;
   }
   
   .home-pagination {
     display: flex;
     justify-content: center;
-    margin-bottom: 20px;
+    margin-top: -20px;
   }
   
   .container-cards {
@@ -82,4 +105,5 @@
       width: 100%;
     }
   }
+
   

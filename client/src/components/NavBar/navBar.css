@@ -1,0 +1,32 @@
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    margin-left: auto;
+    margin-left: 3.5rem;
+    margin-top: 1rem;
+  }
+
+  
+  .navbar .button {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    background-color: rgba(84, 115, 97, 0.8);
+    color: #fff;
+    font-size: 19px;
+    font-weight: bold;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+    width: 100%;
+  }
+  
+  .navbar .button:hover {
+    background-color: #294c4c;
+  }
+  
+  .navbar .backToLanding {
+    margin-right: 1rem;
+  }
+  
