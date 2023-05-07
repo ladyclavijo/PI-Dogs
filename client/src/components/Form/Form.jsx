@@ -127,7 +127,7 @@ const validate = (input) => {
                 <form onSubmit={handleSubmit}>
 
                     <div className="form-input">
-                        <label className="form-label">Name: </label>
+                        <label className="form-name__label">Name: </label>
                         <input value={input.name}
                                type="text"
                                name="name"
@@ -142,10 +142,26 @@ const validate = (input) => {
                             )
                         }
                     </div>
-                               
 
+                    <div className='form-input'>
+                        <label className='form-image__label'>Image: </label>
+                            <input value={input.image}
+                                   type='text'
+                                   name='image'
+                                   autoComplete='off'
+                                   placeholder='Image URL'
+                                   onChange={handleChange}
+                                   className='form-input'/>
+                            {
+                                    error.image && (
+                                        <p>{error.image}</p>
+                                    )
+                                }
+                        </div>
+                                   
+                               
                     <div className="form-input">
-                        <label className="form-label">Height: </label>
+                        <label className="form-height__label">Height: </label>
                         <input value={input.height}
                                type="range"
                                min='0'
@@ -153,8 +169,7 @@ const validate = (input) => {
                                name="height"
                                autoComplete="off"
                                placeholder="0"
-                               onChange={handleChange}
-                        />
+                               onChange={handleChange} />
                         {<p>{input.height}</p>}
                         {
                             error.height && (
@@ -165,7 +180,7 @@ const validate = (input) => {
 
 
                     <div className="form-input">
-                        <label className="form-label">Weight: </label>
+                        <label className="form-weight__label">Weight: </label>
                         <input value={input.weight}
                                type="range"
                                min='0'
@@ -185,7 +200,7 @@ const validate = (input) => {
 
 
                     <div className="form-input">
-                        <label className="form-label">Life_span: </label>
+                        <label className="form-lifespan__label">Life_span: </label>
                         <input value={input.life_span}
                                type="range"
                                min='0'
@@ -205,7 +220,7 @@ const validate = (input) => {
 
 
                     <div className="form-input">
-                      <label className="form-label">Temperament: </label>
+                      <label className="form-temperaments__label">Temperament: </label>
                       <select name="temperament" onChange={handleSelect}>
                           <option hidden value="default">Select a Temperament</option>
                           {temperaments?.map((t) => (
@@ -222,7 +237,11 @@ const validate = (input) => {
                       </div>               
                     </div>
 
-                    <button type="submit">Create!</button> 
+                    <div>
+                    <button type="submit">Create!</button>
+
+                    </div>
+                    
 
                 </form>
 

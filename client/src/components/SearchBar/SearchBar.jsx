@@ -36,6 +36,7 @@ export default function SearchBar() {
                     <button className="search-button" type="submit" onClick={(e) => handleButton(e)}>Search</button>
                 </Link>
                 </div>
+                
             </form>
         </div>
     )
