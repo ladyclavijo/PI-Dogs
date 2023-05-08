@@ -19,9 +19,10 @@ html, body {
     width: 100%;
     background-attachment: fixed;     /* para dejar fija la img de fondo y que no se modifique de tamaño */
     padding-bottom: 30px;
-  }
+}
+
   
-  .nav-container {
+.nav-container {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -29,13 +30,14 @@ html, body {
     color: white;
     margin-top: -20px; /*renglon superiorrrrrr*/
     font-size: 20px;
-  }
+}
 
   .all-containers {
     justify-content: center;
     margin-top: 20px;
     margin-right: 50px;
   }
+  
   
   .container-alphabetical,
   .container-select,
@@ -49,6 +51,7 @@ html, body {
     margin-right: 10px;    
   }
   
+
   .clear-button {
     padding: 10px;
     border-radius: 5px;
@@ -60,6 +63,7 @@ html, body {
     cursor: pointer;
   }
 
+  
 .clear-button:hover {
     background-color: rgb(255, 255, 255);
     color: #000;
@@ -70,12 +74,14 @@ html, body {
     margin-left: auto;
     width: 94%;
   }
+
   
   .home-pagination {
     display: flex;
     justify-content: center;
     margin-top: -20px;
   }
+
   
   .container-cards {
     display: grid;
@@ -92,6 +98,7 @@ html, body {
       align-items: flex-start;
     }
   
+
     .container-alphabetical,
     .container-select,
     .container-temps,
@@ -99,11 +106,10 @@ html, body {
       margin: 10px 0;
     }
   
-    .container-alphabetical,
-    .container-select,
-    .container-temps {
-      width: 100%;
-    }
-  }
 
-  
+.container-alphabetical,
+.container-select,
+.container-temps {
+  width: 100%;
+  }
+}

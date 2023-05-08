@@ -111,7 +111,6 @@ function Home () {
             </div>
 
 
-
     {/* si Loading es true, se renderiza Loading, de lo contrario se renderiza la lista de componentes Card*/}
             {isLoading ? <Loading/> : <div>
                 <div className="container-cards">

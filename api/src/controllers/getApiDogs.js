@@ -8,23 +8,20 @@ const {API_KEY} = process.env;
 
 const getApiDogs = async() => {
         
-    const urlDogs = await axios.get(`https://api.thedogapi.com/v1/breeds?api_key=${API_KEY}`); //hago destructuring de la data de axios
+    const urlDogs = await axios.get(`https://api.thedogapi.com/v1/breeds?api_key=${API_KEY}`);
     const apiData = urlDogs.data.map(e => {
-    
         
         return {
             id: e.id,
             name: e.name,
             image: e.image.url,
             height: e.height.metric.metric,
-            weight: e.weight.metric,
+            weight: e.weight.metric.metric,
             life_span: e.life_span,
             temperaments: e.temperament, 
             createdDB: false        
         };
-            
     })
-    // console.log(apiData)
    
     return apiData;  //espera y retorna el nuevo arreglo
 };

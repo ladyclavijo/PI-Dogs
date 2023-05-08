@@ -4,12 +4,12 @@ const createDog = require("../controllers/createDog");
 
 router.post("/", async(req, res) => {
     try {
-        const {name, temperament, life_span, height, weight, image} = req.body;
-
-        if(!name || !temperament || !life_span || !height || !weight || !image ) {
+        const {name, temperaments, life_span, height, weight, image} = req.body;
+        console.log(temperaments)
+        if(!name || !temperaments || !life_span || !height || !weight || !image ) {
             return res.status(404).send("Missing Data")
         }
-        const newDog = await createDog(name, temperament, life_span, height, weight, image)
+        const newDog = await createDog(name, temperaments, life_span, height, weight, image)
           return res.status(200).send(`The Dog ${name} was created succesfully!`)
         
     } catch (error) {

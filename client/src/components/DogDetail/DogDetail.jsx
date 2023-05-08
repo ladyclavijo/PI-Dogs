@@ -9,24 +9,24 @@ const DogDetail = () => {
     const dispatch = useDispatch();
     const history = useHistory();
     const dog = useSelector(state => state.dogDetail); //renderiza la info detallada del dog especifico
-    const { name, temperament, height, weight, life_span, image} = dog;
+    const { name, temperaments, height, weight, life_span, image} = dog;
+    // console.log(dog)
     let {id} = useParams(); //useParams extrae los parámetros de la URL
 
     useEffect(() => {
         dispatch(getDogId(id)) //obtengo la info del dog
-    }, []);
+    }, [dispatch, id]);
 
     const handleBack = () => {
         history.goBack();
     }
 
-    const temps = dog?.temperament?.split(", ");
+    const temps = temperaments?.split(", ");
     
-    if(dog) {
         return (
             <div className="container-detail">
                 <div className="detail-image">
-                    <img src={image} alt={name}/>
+                    <img src={dog.image} alt={name}/>
                 </div>
                 
                 <div>
@@ -34,14 +34,14 @@ const DogDetail = () => {
                 </div>
                 
                 <div className="detail-info">
-                    <p>Life_span: {life_span}</p>
-                    <p>Height: {height?.metric}</p>
-                    <p>Weight: {weight?.metric}</p>
+                    <p>Life span: {life_span}</p>
+                    <p>Height: {height?.metric ? height?.metric : height}</p>
+                    <p>Weight: {weight?.metric ? weight?.metric : weight}</p>
                 </div>
     
                 <div>
                     <p>Temperament: </p>
-                    {temperament && temperament.length > 0 && (
+                    {temperaments && temperaments?.length > 0 && (
                         <ul className="lista">
                             {temps?.map(t => {
                                 return(
@@ -55,8 +55,6 @@ const DogDetail = () => {
                 <button onClick={handleBack}>BACK</button>
             </div>
         )
-        
-    } else return <Loading/>
 }
 
 export default DogDetail;

@@ -1,11 +1,10 @@
 const { Dog, Temperament } = require("../db"); // importo los modelos de la BD
 
-const createDog = async (name, temperament, life_span, height, weight, image) => {
-
+const createDog = async (name, temperaments, life_span, height, weight, image) => {
+    
     try {
-
 // Verifico que todos los campos requeridos estén presentes
-    if (!name || !temperament || !life_span || !height || !weight || !image) {
+    if (!name || !temperaments || !life_span || !height || !weight || !image) {
         throw new Error("All fields are required");
       }
 
@@ -14,18 +13,15 @@ const createDog = async (name, temperament, life_span, height, weight, image) =>
         if (existingDog) {
         throw new Error("Dog already exists!");
         }
-        // if (name.length > 100) {
-        // throw new Error("Name is too long");
-        // }
 
 // Obtengo los temperamentos como un array y los uno en un solo string separados por comas
-        const temperamentArray = Array.isArray(temperament) ? temperament : [temperament];
+        const temperamentArray = Array.isArray(temperaments) ? temperaments : [temperaments];
+        
         const temperamentString = temperamentArray.join(", ");
         
-
         const newDog = await Dog.create({
             name,
-            temperament: temperamentString,
+            temperaments: temperamentString,
             life_span,
             height: height ? height : 0,
             weight: weight ? weight : 0,
@@ -33,7 +29,7 @@ const createDog = async (name, temperament, life_span, height, weight, image) =>
         })
         
         const dogTemperament = await Temperament.findAll({
-            where: {name: temperament}
+            where: {name: temperaments}
         })
                 
         newDog.addTemperament(dogTemperament); 

@@ -10,15 +10,14 @@ const findByNameApi = async (name) => {
         const dogApi = {
             id: data.id,
             name: data.name,
-            // image: data.image.url,
+            image: data.image.url,
             height: data.height,
             weight: data.weight,
             life_span: data.life_span,
-            temperament: data.temperament
+            temperaments: data.temperament
         };
         return dogApi;
        
-    
     } catch (error) {
         return {
             error: "Dog Not Found",

@@ -4,13 +4,20 @@ import React from "react";
 
 const Loading = () => {
     return(
-        <div className="spinner">
-          <div className="spinner1">
-          {/* <img src={Loading} alt="no image"/> */}
-          <h3>Loading...</h3>
-          </div>
+      <div className="loader">
+        <p className="heading">Loading</p>
+
+        <div className="loading">
+        <div className="load"></div>
+        <div className="load"></div>
+        <div className="load"></div>
+        <div className="load"></div>
         </div>
+      </div>
     )
 };
+
+
+
 
 export default Loading;

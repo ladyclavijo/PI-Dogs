@@ -24,7 +24,7 @@ const allTemperaments = async () => {
         }
     });
      const findTemps = await Temperament.findAll(); 
-     console.log(findTemps)
+    //  console.log(findTemps)
      return findTemps; //devuelve todos los temperamentos almacenados en la BD usand findAll
     
     } catch (error) {

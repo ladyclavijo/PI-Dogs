@@ -1,6 +1,7 @@
+import "./form.css";
 import React, {useState, useEffect} from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useHistory } from "react-router-dom"
+import { Link } from "react-router-dom"
 import { getAllDogs, getAllTemperaments, createDog} from "../../redux/actions/index";
 
 const validate = (input) => {
@@ -36,7 +37,7 @@ const validate = (input) => {
     const Form = () => {
         
         const dispatch = useDispatch();
-        const history = useHistory();
+        // const history = useHistory();
         const dogs = useSelector(state => state.copyDogs);
         const temperaments = useSelector(state => state.temperaments);
         const [error, setError] = useState({});
@@ -104,10 +105,8 @@ const validate = (input) => {
             return;
         }
 
-
         dispatch(createDog(input));
 
-        alert("Your Dog has been created succesfully!")
         setInput({
             name: "",
             image: "",
@@ -116,24 +115,41 @@ const validate = (input) => {
             life_span: 0,
             temperaments: [],
         })
-        history.push("/home")
+
     };
 
     return(
+        
+        <div className="form-container">
 
-        <div>
-            <h1 className="tittle">Create your Doggy!</h1>
+            <div className="backToHome">
+             <Link to="/home">
+                <div className="button">GO HOME</div>
+             </Link>
+            </div>
+
+
+        <div className="form">
+
+
+            <div>
+            <h1 className="title">CREATE YOUR DOGGY!</h1>
+            </div>
+
+
             <div className="container-form">
-                <form onSubmit={handleSubmit}>
+                <form onSubmit={e => handleSubmit(e)}>
 
+            
+                <div>
                     <div className="form-input">
                         <label className="form-name__label">Name: </label>
-                        <input value={input.name}
+                        <input className="input-name" value={input.name}
                                type="text"
                                name="name"
                                autoComplete="off"
                                placeholder="Enter a name"
-                               onChange={handleChange}
+                               onChange={e => handleChange(e)}
                         />
 
                         {
@@ -142,25 +158,31 @@ const validate = (input) => {
                             )
                         }
                     </div>
+                </div>
+            
 
-                    <div className='form-input'>
+                <div>
+                    <div className="form-input">
                         <label className='form-image__label'>Image: </label>
-                            <input value={input.image}
+                            <input className="input-image" value={input.image}
                                    type='text'
                                    name='image'
                                    autoComplete='off'
                                    placeholder='Image URL'
-                                   onChange={handleChange}
-                                   className='form-input'/>
+                                   onChange={e => handleChange(e)}
+                            />
+
                             {
                                     error.image && (
                                         <p>{error.image}</p>
                                     )
                                 }
                         </div>
+                </div>
                                    
                                
-                    <div className="form-input">
+            <div>
+                    <div className="range-input">
                         <label className="form-height__label">Height: </label>
                         <input value={input.height}
                                type="range"
@@ -169,7 +191,7 @@ const validate = (input) => {
                                name="height"
                                autoComplete="off"
                                placeholder="0"
-                               onChange={handleChange} />
+                               onChange={e => handleChange(e)} />
                         {<p>{input.height}</p>}
                         {
                             error.height && (
@@ -179,7 +201,7 @@ const validate = (input) => {
                     </div>
 
 
-                    <div className="form-input">
+                    <div className="range-input">
                         <label className="form-weight__label">Weight: </label>
                         <input value={input.weight}
                                type="range"
@@ -188,7 +210,7 @@ const validate = (input) => {
                                name="weight"
                                autoComplete="off"
                                placeholder="0"
-                               onChange={handleChange}
+                               onChange={e => handleChange(e)}
                         />
                         {<p>{input.weight}</p>}
                         {
@@ -199,8 +221,8 @@ const validate = (input) => {
                     </div>
 
 
-                    <div className="form-input">
-                        <label className="form-lifespan__label">Life_span: </label>
+                    <div className="range-input">
+                        <label className="lifespan__label">Life span: </label>
                         <input value={input.life_span}
                                type="range"
                                min='0'
@@ -208,7 +230,7 @@ const validate = (input) => {
                                name="life_span"
                                autoComplete="off"
                                placeholder="0"
-                               onChange={handleChange}
+                               onChange={e => handleChange(e)}
                         />
                         {<p>{input.life_span}</p>}                        
                         {
@@ -217,18 +239,24 @@ const validate = (input) => {
                             )
                         }
                     </div>
+            </div>
 
 
-                    <div className="form-input">
+            <div className="temperaments-container">
+                    <div>
                       <label className="form-temperaments__label">Temperament: </label>
-                      <select name="temperament" onChange={handleSelect}>
+                    
+                    <div className="temperaments-options">
+                      <select name="temperament" onChange={e => handleSelect(e)}>
+                        
                           <option hidden value="default">Select a Temperament</option>
                           {temperaments?.map((t) => (
                             <option key={t.name} value={t.name}>{t.name}</option>
                           ))}
                       </select>
+                    </div>
 
-                      <div className='temperaments-select'>
+                      <div className='temperaments-input'>
                          {input.temperaments.map((temperaments, index) => (
                              <div className='form-temperaments__div' key={index}>{temperaments}
                              <button onClick={() => handleDelete(temperaments)}>x</button>
@@ -236,18 +264,20 @@ const validate = (input) => {
                          ))}
                       </div>               
                     </div>
+            </div>
+
 
                     <div>
-                    <button type="submit">Create!</button>
-
+                    <button className="button-create" type="submit">CREATE</button>
                     </div>
                     
 
                 </form>
 
-                <Link to="/home"><button>GO HOME</button></Link>
-
             </div>
+
+          </div>
+
         </div>
     )
 }

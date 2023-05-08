@@ -13,6 +13,7 @@ const LandingPage = () => {
                 <div className="gif-container"> </div>
             </div>
 
+
             <div className="title-container">
             <h1 className="landing-title">DOGGYDEX!</h1>
             </div>
@@ -26,7 +27,7 @@ const LandingPage = () => {
           </div>
 
             <div className="footer-container">
-                <h3 className="footer-landing">Made by <a href="https://www.linkedin.com/in/ladyclavijo/" target="_blank" rel="noreferrer" className={StyleSheet.link}>Lady Clavijo</a></h3>
+                <h3 className="footer-landing">Made by <a href="https://github.com/ladyclavijo" target="_blank" rel="noreferrer" className={StyleSheet.link}>Lady Clavijo</a></h3>
             </div>
 
         </div>

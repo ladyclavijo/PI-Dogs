@@ -13,7 +13,7 @@ const findByIdApi = async (id) => {
             height: data.height,
             weight: data.weight,
             life_span: data.life_span,
-            temperament: data.temperament 
+            temperaments: data.temperament 
         };
         
     } catch (error) {
