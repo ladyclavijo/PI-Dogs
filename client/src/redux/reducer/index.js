@@ -90,8 +90,7 @@ const initialState = {  //el initialState se guarda en el store
             case "CLEAR_DETAIL":
                 return{
                     ...state,
-                    dogs: [],
-                    // copyDogs: []
+                    dogDetail: []
                 }
     
         default: return state;

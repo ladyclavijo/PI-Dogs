@@ -1,5 +1,5 @@
 import "./dogDetail.css"
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, useHistory } from "react-router-dom";
 import { getDogId, clearDetail } from "../../redux/actions/index";
@@ -11,11 +11,14 @@ const DogDetail = () => {
     const history = useHistory();
     const dog = useSelector(state => state.dogDetail); //renderiza la info detallada del dog especifico
     const { name, temperaments, height, weight, life_span, image} = dog;
-    // console.log(dog)
+    
     let {id} = useParams(); //useParams extrae los parámetros de la URL
 
     useEffect(() => {
         dispatch(getDogId(id)) //obtengo la info del dog
+        return () => {
+            dispatch(clearDetail()) //le paso un return cuando se desmonta
+        }
     }, [dispatch, id]);
 
     const handleBack = () => {
@@ -29,6 +32,7 @@ const DogDetail = () => {
         temps = temperaments
     }
     
+    if(dog.hasOwnProperty("name")) {
         return (
 
             <div className="container-detail">
@@ -63,6 +67,7 @@ const DogDetail = () => {
                 <button onClick={handleBack}>BACK</button>
             </div>
         )
+        } else return <Loading></Loading> 
 }
 
 export default DogDetail;
