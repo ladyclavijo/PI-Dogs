@@ -13,8 +13,8 @@ const allTemperaments = async () => {
     temps.data.forEach(e => { // analizo cada elemento del arreglo
         if (e.temperament){
             let foundTemps = e.temperament.split(", ");
-//Esta parte del código es importante xq divide los temperamentos de las razas de dogs en temperamentos
-//individuales, lo que facilita el proceso de agregarlos a la BD
+//Esta parte del código divide los temperamentos de los dogs en temperamentos individuales, 
+//lo que facilita el proceso de agregarlos a la BD
 
             foundTemps.forEach(e => {// recorre cada raza de perro y si tiene un temp definido, lo recorre
                 Temperament.findOrCreate({//busca y sino lo encuentra lo crea

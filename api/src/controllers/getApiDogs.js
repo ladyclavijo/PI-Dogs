@@ -15,8 +15,8 @@ const getApiDogs = async() => {
             id: e.id,
             name: e.name,
             image: e.image.url,
-            height: e.height.metric.metric,
-            weight: e.weight.metric.metric,
+            height: e.height.metric,
+            weight: e.weight.metric,
             life_span: e.life_span,
             temperaments: e.temperament, 
             createdDB: false        

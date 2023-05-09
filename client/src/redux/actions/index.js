@@ -40,7 +40,7 @@ export const getDogName = (name) => {
                 payload: response.data
             })
         } catch (error) {
-            alert(`The dog ${name} doesn't exist`, error.message)
+            // alert(`The dog ${name} doesn't exist`, error.message)
         }
     }
 
@@ -77,9 +77,10 @@ export const createDog = (payload) => {
     return async(dispatch) => {
         try {
         let response = await axios.post("/dogs", payload);
+        console.log(response)
         return dispatch({
             type: "CREATE_DOG",
-            payload: response.data
+            payload: response
         })
         }
         catch (error) {
@@ -101,14 +102,10 @@ export const orderByName = (payload) => {
 
 export const orderByTemperament = (payload) => {
     return(dispatch) => {
-        try {
             return dispatch({
                 type: "ORDER_BY_TEMPERAMENT",
                 payload
             })            
-        } catch (error) {
-            alert ("Couldn't remove Dog")
-        }
     }
 };
 

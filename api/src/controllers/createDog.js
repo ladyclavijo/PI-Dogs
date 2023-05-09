@@ -27,6 +27,7 @@ const createDog = async (name, temperaments, life_span, height, weight, image) =
             weight: weight ? weight : 0,
             image: image ? image : "BUSCAR UNA IMAGEN"
         })
+        console.log(newDog + "vengo del Back a salvarte")
         
         const dogTemperament = await Temperament.findAll({
             where: {name: temperaments}

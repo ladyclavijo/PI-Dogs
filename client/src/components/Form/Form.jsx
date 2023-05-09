@@ -2,7 +2,7 @@ import "./form.css";
 import React, {useState, useEffect} from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom"
-import { getAllDogs, getAllTemperaments, createDog} from "../../redux/actions/index";
+import {getAllDogs, getAllTemperaments, createDog} from "../../redux/actions/index";
 
 const validate = (input) => {
     let errors = {};
@@ -106,6 +106,7 @@ const validate = (input) => {
         }
 
         dispatch(createDog(input));
+        alert("Your doggy has been created!")
 
         setInput({
             name: "",

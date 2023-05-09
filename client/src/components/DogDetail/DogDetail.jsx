@@ -1,3 +1,4 @@
+import "./dogDetail.css"
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, useHistory } from "react-router-dom";
@@ -21,10 +22,17 @@ const DogDetail = () => {
         history.goBack();
     }
 
-    const temps = temperaments?.split(", ");
+    let temps;
+    if (typeof temperaments === "string"){
+        temps = temperaments.split(", ");
+    } else {
+        temps = temperaments
+    }
     
         return (
+
             <div className="container-detail">
+
                 <div className="detail-image">
                     <img src={dog.image} alt={name}/>
                 </div>
@@ -39,7 +47,7 @@ const DogDetail = () => {
                     <p>Weight: {weight?.metric ? weight?.metric : weight}</p>
                 </div>
     
-                <div>
+                <div className="detail-temps">
                     <p>Temperament: </p>
                     {temperaments && temperaments?.length > 0 && (
                         <ul className="lista">

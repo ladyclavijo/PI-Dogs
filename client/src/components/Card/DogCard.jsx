@@ -3,6 +3,7 @@ import React from "react";
 // import { Link } from "react-router-dom";
 
 const DogCard = ({name, image, temperaments, weight}) => { // me lo traigo por props
+    // console.log(weight)
 
     let temps;
     if (typeof temperaments === "string") {
@@ -19,9 +20,9 @@ const DogCard = ({name, image, temperaments, weight}) => { // me lo traigo por p
         <img className="container-image__img" src={image} alt= "img not found"/>
         </div>
 
-        <div className="info-card">
+        <div className="info-card">        
             <p className="card-title">{name}</p>
-        
+            <div className="middle-cards">
 
         <div className="temperaments-div">
             <p className="temps-title">Temperaments: </p>
@@ -30,7 +31,6 @@ const DogCard = ({name, image, temperaments, weight}) => { // me lo traigo por p
             })}
         </div>
         
-        <div className="middle-cards">
             <p className="card-text">Weight: {weight}</p>
         </div>
 

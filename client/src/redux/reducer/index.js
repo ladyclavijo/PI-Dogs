@@ -45,14 +45,9 @@ const initialState = {  //el initialState se guarda en el store
                 };
     
     
-            case "CREATE_DOG":
-                const allDogsCreated = state.dogs;
-                const createdFilter = action.payload === "createdDB" 
-                ? allDogsCreated.filter(e => e.createdDB === true)
-                : allDogsCreated.filter(e => e.createdDB === false);
+            case "CREATE_DOG":                
                 return{
                     ...state,
-                    dogs: action.payload === "all" ? allDogsCreated : createdFilter
                 };
     
     
