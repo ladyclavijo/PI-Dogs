@@ -38,7 +38,6 @@ const validate = (input) => {
         
         const dispatch = useDispatch();
         // const history = useHistory();
-        const dogs = useSelector(state => state.copyDogs);
         const temperaments = useSelector(state => state.temperaments);
         const [error, setError] = useState({});
         

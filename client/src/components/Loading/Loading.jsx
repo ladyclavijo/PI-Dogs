@@ -1,4 +1,4 @@
-import "./loading.css";
+import "./Loading.css";
 import React from "react";
 
 

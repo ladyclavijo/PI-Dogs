@@ -1,4 +1,5 @@
 .landing-container {
+    position: relative;
     background-image: url("../../images/image2.jpg");
     background-position: center center;
     background-size: cover;
@@ -6,9 +7,9 @@
     height: 100%;
     width: 100%;
     background-attachment: fixed; /* para dejar fija la img de fondo y que no se modifique de tamaño */
-    margin-top: -18px;
-    padding-bottom: 292px;
-    overflow: hidden;
+    /* margin-top: -18px; */
+    /* padding-bottom: 292px; */
+    /* overflow: hidden; */
   }
   
   .header-container {
@@ -20,7 +21,7 @@
   .landing-title {
     font-size: 90px;
     color: rgb(20, 76, 139);
-    margin-top: -90px;
+    /* margin-top: -90px; */
   }
   
   .gif-container {
@@ -29,8 +30,8 @@
     background-position: center;
     background-size: contain;
     width: 100px;
-    height: 200px;
-    margin-bottom: 50px;
+    height: 100px;
+    /* margin-bottom: 50px; */
   }
   
   .landing-button {
@@ -75,9 +76,12 @@
   }
   
   .middle-landing-container {
+    position: relative;
+    height: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    margin-top: 50px;
+    /* margin-top: 50px; */
+    padding-bottom: 200px;
   }
