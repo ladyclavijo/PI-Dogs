@@ -6,7 +6,7 @@
     height: 100%;
     width: 100%;
     background-attachment: fixed;     /* para dejar fija la img de fondo y que no se modifique de tamaño */
-    margin-top: -18px;
+    /* margin-top: -18px; */
     padding-bottom: 102px;
     overflow: hidden;
 }
