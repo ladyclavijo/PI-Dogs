@@ -86,7 +86,14 @@ const initialState = {  //el initialState se guarda en el store
                     ...state, 
                     currentPage: action.payload             
                 };
-                
+
+
+            case "CLEAR_DETAIL":
+                return{
+                    ...state,
+                    dogDetail: []
+                };
+
         default: return state;
         }
     }

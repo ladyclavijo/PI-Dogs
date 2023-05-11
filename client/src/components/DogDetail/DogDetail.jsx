@@ -2,7 +2,7 @@ import "./dogDetail.css"
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, useHistory } from "react-router-dom";
-import { getDogId } from "../../redux/actions/index";
+import { getDogId, clearDetail } from "../../redux/actions/index";
 import Loading from "../Loading/Loading.jsx";
 
 const DogDetail = () => {
@@ -16,8 +16,10 @@ const DogDetail = () => {
 
     useEffect(() => {
         dispatch(getDogId(id)) //obtengo la info del dog
+        return () => {
+            dispatch(clearDetail())
+        }
     }, [dispatch, id]);
-
     const handleBack = () => {
         history.goBack();
     }
