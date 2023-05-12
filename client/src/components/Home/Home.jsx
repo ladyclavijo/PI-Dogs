@@ -3,7 +3,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { filterBySource, filterByTemperaments, getAllDogs, getAllTemperaments, orderByName } from "../../redux/actions/index";
+import { clearDetail, filterBySource, filterByTemperaments, getAllDogs, getAllTemperaments, orderByName } from "../../redux/actions/index";
 
 //importo los components necesarios
 import DogCard from "../Card/DogCard";
@@ -41,8 +41,11 @@ function Home () {
 
     useEffect(() => {
         dispatch(getAllDogs());
-        dispatch(getAllTemperaments())
+        dispatch(getAllTemperaments());
         setIsLoading(false);
+        return () => {
+            dispatch(clearDetail())
+        };
     }, [dispatch])
 
 

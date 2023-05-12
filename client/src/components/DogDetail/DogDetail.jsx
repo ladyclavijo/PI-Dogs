@@ -46,7 +46,7 @@ const DogDetail = () => {
                 <div className="middle-container">
                 
                 <div className="detail-name">
-                    <p className="title">{name}</p>
+                    <p className="detail-title">{name}</p>
                 </div>
                 
                 <div className="detail-info">

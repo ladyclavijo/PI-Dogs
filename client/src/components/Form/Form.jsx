@@ -2,7 +2,7 @@ import "./form.css";
 import React, {useState, useEffect} from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom"
-import {getAllDogs, getAllTemperaments, createDog} from "../../redux/actions/index";
+import {getAllDogs, getAllTemperaments, createDog, clearDetail} from "../../redux/actions/index";
 
 const validate = (input) => {
     let errors = {};
@@ -37,7 +37,6 @@ const validate = (input) => {
     const Form = () => {
         
         const dispatch = useDispatch();
-        // const history = useHistory();
         const temperaments = useSelector(state => state.temperaments);
         const [error, setError] = useState({});
         
@@ -45,6 +44,9 @@ const validate = (input) => {
     useEffect(() => {
         dispatch(getAllDogs());
         dispatch(getAllTemperaments());
+        return() => {
+            dispatch(clearDetail())
+        }
     }, [dispatch])
 
     
