@@ -129,10 +129,11 @@ export const currentPage = (payload) => {
     }
 };
 
+
 export const clearDetail = () => {
     return (dispatch) => {
         return dispatch({
-            type: "CLEAR_DETAIL",
+            type: "CLEAR_DETAIL"
         })
     }
 };
