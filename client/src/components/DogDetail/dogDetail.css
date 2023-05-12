@@ -3,6 +3,7 @@
   align-items: center;
   flex-direction: column;
   padding-top: 50px;
+  padding-bottom: 50px;
 }
 
 
@@ -22,13 +23,14 @@
   .detail-image {
     display: flex;
     width: 200px;
-    max-height: auto;
-    border: 1px solid #2ba0a8;
+    border: 1px solid #86bef1;
+    border-radius: 7px;
     box-sizing: content-box
   }
 
   .detail-image img {
     max-width: 100%;
+    border-radius: 7px;
     /* height: auto; */
   }
   
@@ -88,6 +90,9 @@
     border-radius: 7px;
     font-size: 16px;
     font-weight: bold;
+    position: absolute;
+    top: 17px;
+    left: 25px;
 }
 
 .button-back:hover {
