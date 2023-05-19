@@ -1,15 +1,3 @@
-/* body {
-  margin-top: 0;
-}
-
-html, body {
-  height: 100%;
-  margin: 0;
-  padding: 0;
-  overflow:auto;
-} */
-
-
 .container-home {
     position: relative;
     background-image: url("../../images/home.jpg");
@@ -79,7 +67,7 @@ html, body {
   .home-pagination {
     display: flex;
     justify-content: center;
-    margin-bottom: 30px;
+    margin-bottom: 25px;
   }
 
   
